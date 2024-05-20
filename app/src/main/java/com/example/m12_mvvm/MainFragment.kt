@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.fragment.app.viewModels
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat.getColor
 import androidx.core.graphics.toColor
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
@@ -68,7 +69,7 @@ class MainFragment : Fragment() {
                             State.Success -> {
                                 binding.editText.isEnabled = true
                                 binding.buttonSearch.isEnabled = true
-                                binding.textView.text = getString(R.string.search_no_result)
+                                binding.textView.text = ("По вашему запросу ${binding.editText.text.toString()} ничего не найдено")
                                 binding.progress.isVisible = false
                             }
 
