@@ -30,7 +30,7 @@ class MainViewModel : ViewModel() {
         viewModelScope.launch {
             _state.value = State.Loading
             delay(5_000)
-            _state.value = State.Success
+            _state.value = State.Success(searchString)
         }
     }
 }

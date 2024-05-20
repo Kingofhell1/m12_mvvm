@@ -51,7 +51,7 @@ class MainFragment : Fragment() {
                 viewModel.state
                     .collect { state ->
                         when (state) {
-                            State.Start -> {
+                            is State.Start -> {
                                 binding.editText.isEnabled = true
                                 binding.buttonSearch.isEnabled = false
                                 binding.textView.text = getString(R.string.search_result)
@@ -59,17 +59,17 @@ class MainFragment : Fragment() {
 
                             }
 
-                            State.Loading -> {
+                            is State.Loading -> {
                                 binding.editText.isEnabled = false
                                 binding.buttonSearch.isEnabled = false
                                 binding.textView.text = getString(R.string.search_continue)
                                 binding.progress.isVisible = true
                             }
 
-                            State.Success -> {
+                           is State.Success -> {
                                 binding.editText.isEnabled = true
                                 binding.buttonSearch.isEnabled = true
-                                binding.textView.text = ("По вашему запросу ${binding.editText.text.toString()} ничего не найдено")
+                                binding.textView.text = ("По вашему запросу ${state.result} ничего не найдено")
                                 binding.progress.isVisible = false
                             }
 
