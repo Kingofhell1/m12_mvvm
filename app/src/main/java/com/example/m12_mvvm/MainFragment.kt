@@ -32,50 +32,46 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // условие проверки нажатия кнопки
-        binding.editText.addTextChangedListener { it ->
-            if (it.isNullOrEmpty() || it.length < 3)
-                binding.buttonSearch.isEnabled = false
-            else
-                binding.buttonSearch.isEnabled = true
+        //
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
 
-
-        }
+// ---------------------------------------- СТАРЫЙ КОД ------------------------------------------------//fff
         // активация поиска
-        binding.buttonSearch.setOnClickListener {
-            val searchString = binding.editText.text.toString()
-            viewModel.onSignInClick(searchString)
-        }
-        viewLifecycleOwner.lifecycleScope
-            .launchWhenStarted {
-                viewModel.state
-                    .collect { state ->
-                        when (state) {
-                            is State.Start -> {
-                                binding.editText.isEnabled = true
-                                binding.buttonSearch.isEnabled = false
-                                binding.textView.text = getString(R.string.search_result)
-                                binding.progress.isVisible = false
+//        binding.buttonSearch.setOnClickListener {
+//            val searchString = binding.editText.text.toString()
+//            viewModel.onSignInClick(searchString)
+//        }
+//        viewLifecycleOwner.lifecycleScope
+//            .launchWhenStarted {
+//                viewModel.state
+//                    .collect { state ->
+//                        when (state) {
+//                            is State.Start -> {
+//                                binding.editText.isEnabled = true
+//                                binding.buttonSearch.isEnabled = false
+//                                binding.textView.text = getString(R.string.search_result)
+//                                binding.progress.isVisible = false
+//
+//                            }
+//
+//                            is State.Loading -> {
+//                                binding.editText.isEnabled = false
+//                                binding.buttonSearch.isEnabled = false
+//                                binding.textView.text = getString(R.string.search_continue)
+//                                binding.progress.isVisible = true
+//                            }
+//
+//                           is State.Success -> {
+//                                binding.editText.isEnabled = true
+//                                binding.buttonSearch.isEnabled = true
+//                                binding.textView.text = ("По вашему запросу ${state.resul} ничего не найдено")
+//                                binding.progress.isVisible = false
+//                            }
+//
+//                        }
+//                    }
 
-                            }
-
-                            is State.Loading -> {
-                                binding.editText.isEnabled = false
-                                binding.buttonSearch.isEnabled = false
-                                binding.textView.text = getString(R.string.search_continue)
-                                binding.progress.isVisible = true
-                            }
-
-                           is State.Success -> {
-                                binding.editText.isEnabled = true
-                                binding.buttonSearch.isEnabled = true
-                                binding.textView.text = ("По вашему запросу ${state.result} ничего не найдено")
-                                binding.progress.isVisible = false
-                            }
-
-                        }
-                    }
-            }
 
     }
 
