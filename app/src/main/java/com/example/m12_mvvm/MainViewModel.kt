@@ -17,8 +17,11 @@ private const val TAG = "MainViewModel"
 
 class MainViewModel : ViewModel() {
     private lateinit var _searchJob: Job
+
     private val _state: MutableStateFlow<State> = MutableStateFlow<State>(State.Start)
+
     val state: StateFlow<State> = _state.asStateFlow()
+
     val searchString = MutableStateFlow("")
 
     init {
